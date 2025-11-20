@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farming Robot Team Page</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        
+        :root {
+            --color-bg: #0d0221;
+            --color-neon-blue: #00FFFF;
+            --color-neon-green: #00FF00;
+            --color-neon-magenta: #FF00FF;
+            --font-header: 'Chakra Petch', sans-serif;
+            --font-body: 'Share Tech Mono', monospace;
+            --shadow-blue: 0 0 8px var(--color-neon-blue), 0 0 15px var(--color-neon-blue);
+            --shadow-green: 0 0 5px var(--color-neon-green);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-radius: 8px;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: #E0E0E0;
+            font-family: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(10, 5, 20, 0.7);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            min-height: calc(100vh - 40px);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-wrapper { padding: 10px; }
+            .content-container { padding: 10px; }
+        }
+
+       
+        .main-header { text-align: center; margin-bottom: 30px; }
+        h1, h2 {
+            font-family: var(--font-header);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-neon-blue);
+        }
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-shadow: var(--shadow-blue);
+            padding: 10px 0;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-neon-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .subtitle {
+            color: var(--color-neon-green);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+       
+        .card {
+            background-color: rgba(2, 2, 30, 0.9);
+            padding: 20px;
+            border: 1px solid var(--color-neon-magenta);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--color-neon-blue);
+        }
+
+        .team-profile-section, .feedback-section { grid-column: 1 / -1; }
+
+        
+        .nav-links { display: flex; justify-content: flex-end; padding: 10px 0; margin-bottom: 20px; }
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-neon-blue);
+            font-family: var(--font-header);
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border: 2px solid var(--color-neon-blue);
+            transition: all 0.3s;
+            box-shadow: var(--shadow-blue);
+        }
+        .nav-link:hover {
+            color: var(--color-bg);
+            background-color: var(--color-neon-magenta);
+            border-color: var(--color-neon-magenta);
+            text-shadow: none;
+            box-shadow: 0 0 10px var(--color-neon-magenta);
+        }
+
+        
+        .team-members-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .teammate-card {
+            background-color: rgba(0, 50, 50, 0.6);
+            padding: 15px;
+            border: 1px solid var(--color-neon-green);
+            text-align: center;
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .teammate-card:hover {
+            transform: scale(1.03);
+            background-color: rgba(0, 50, 50, 0.8);
+        }
+
+        .teammate-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-neon-blue);
+            margin-bottom: 10px;
+        }
+
+        
+        @media (max-width: 768px) {
+            .team-members-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        
+        .teammate-card:nth-child(1) { 
+            border-color: var(--color-neon-blue); 
+            box-shadow: 0 0 8px var(--color-neon-blue);
+        }
+        .teammate-card:nth-child(1)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-neon-blue), transparent);
+            box-shadow: 0 0 5px var(--color-neon-blue);
+            animation: horizontal-scan 2s linear infinite;
+        }
+
+        @keyframes horizontal-scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(400px); } 
+        }
+
+      
+        .teammate-card:nth-child(2) { 
+            border-color: var(--color-neon-magenta); 
+            box-shadow: 0 0 8px var(--color-neon-magenta);
+        }
+        .teammate-card:nth-child(2)::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            border: 2px solid var(--color-neon-magenta);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            box-shadow: 0 0 10px var(--color-neon-magenta);
+            animation: rotation-frame 4s linear infinite;
+        }
+        .teammate-card:nth-child(2)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            border: 1px solid rgba(255, 0, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: rotation-frame 6s linear reverse infinite; 
+        }
+
+        @keyframes rotation-frame {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        
+        .teammate-card:nth-child(3) { 
+            border-color: var(--color-neon-green); 
+            box-shadow: 0 0 8px var(--color-neon-green);
+        }
+        .teammate-card:nth-child(3)::before,
+        .teammate-card:nth-child(3)::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--color-neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--color-neon-green), 0 0 15px var(--color-neon-green);
+            animation: pulse-corner 2s ease-in-out infinite alternate;
+        }
+
+        .teammate-card:nth-child(3)::before {
+            top: -5px;
+            left: -5px;
+            animation-delay: 0s;
+        }
+
+        .teammate-card:nth-child(3)::after {
+            bottom: -5px;
+            right: -5px;
+            animation-delay: 1s; 
+        }
+        
+        @keyframes pulse-corner {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0.4; }
+        }
+
+        .data-hub-section, .diagram-section {
+            min-height: 250px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .data-points p {
+            font-size: 1.1rem;
+            margin: 5px 0;
+            color: var(--color-neon-green);
+        }
+        .data-points span {
+            color: var(--color-neon-blue);
+            font-weight: bold;
+        }
+
+        .atom-diagram-placeholder, .model-placeholder {
+            background-color: rgba(0, 255, 255, 0.1);
+            border: 1px dashed var(--color-neon-blue);
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--color-neon-blue);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+       
+        .feedback-section {
+            text-align: center;
+            margin-top: 30px;
+            background-color: rgba(20, 5, 40, 0.9);
+            border: 2px solid var(--color-neon-magenta);
+        }
+        
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 90%;
+            max-width: 500px;
+            background-color: rgba(5, 0, 10, 0.8);
+            border: 1px solid var(--color-neon-blue);
+            color: var(--color-neon-green);
+            padding: 15px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+        
+        textarea:focus {
+            border-color: var(--color-neon-magenta);
+            box-shadow: 0 0 10px var(--color-neon-magenta);
+        }
+
+        .thank-you {
+            margin-top: 20px;
+            color: var(--color-neon-green);
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+       
+        .button {
+            padding: 10px 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: var(--font-header);
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 3px solid var(--color-neon-green);
+            background: none;
+            color: var(--color-neon-green);
+            margin-top: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-button { animation: neon-pulse 1.5s infinite alternate; }
+        
+        .neon-button:hover {
+            color: var(--color-bg);
+            background-color: var(--color-neon-green);
+            box-shadow: 0 0 20px var(--color-neon-green);
+            animation: none;
+        }
+
+        @keyframes glitch-shift {
+            0% { text-shadow: var(--shadow-blue); }
+            30% { text-shadow: 2px 0 var(--color-neon-magenta), -2px 0 var(--color-neon-green); }
+            60% { text-shadow: 4px 0 var(--color-neon-blue), -4px 0 var(--color-neon-magenta); }
+            100% { text-shadow: var(--shadow-blue); }
+        }
+        
+        .glitch-text { animation: glitch-shift 4s infinite alternate; }
+
+        @keyframes neon-pulse {
+            from {
+                text-shadow: 0 0 5px var(--color-neon-green), 0 0 10px var(--color-neon-green);
+                box-shadow: 0 0 5px var(--color-neon-green);
+            }
+            to {
+                text-shadow: 0 0 15px var(--color-neon-green), 0 0 25px var(--color-neon-blue);
+                box-shadow: 0 0 10px var(--color-neon-blue);
+            }
+        }
+        
+        @keyframes blob-move {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30vw, -10vh) scale(1.1); }
+            50% { transform: translate(-20vw, 20vh) scale(0.9); }
+            75% { transform: translate(10vw, 5vh) scale(1.2); }
+        }
+
+        .bg-blob {
+            position: absolute;
+            opacity: 0.4;
+            filter: blur(100px);
+            z-index: 0;
+            animation: blob-move 20s infinite alternate;
+        }
+
+        .blob-1 { width: 400px; height: 400px; background: var(--color-neon-magenta); top: 5%; left: -10%; }
+        .blob-2 { width: 500px; height: 500px; background: var(--color-neon-blue); bottom: 10%; right: -15%; animation-delay: -5s; }
+        .blob-3 { width: 300px; height: 300px; background: var(--color-neon-green); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
+
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+
+        <div class="content-container">
+            
+            <header class="main-header">
+                <h1 class="glitch-text">MULTI-FUNCTIONAL FARMING ROBOT</h1>
+                <p class="subtitle">Next-Gen Agri-Tech. Automating the Green Life.</p>
+            </header>
+
+            <nav class="nav-links">
+                <a href="details.html" class="nav-link" target="_blank">Details ↗️</a>
+            </nav>
+
+            <main class="content-grid">
+                
+                <section class="card team-profile-section">
+                    <h2>CORE TEAM: THE BUILDERS</h2>
+                    
+                    <div class="team-members-container">
+                        
+                        <div class="teammate-card">
+                            <img src="girl1-removebg-preview.png" alt="Teammate 1 Photo" class="teammate-photo">
+                            <h3>Riya Manjhi</h3>
+                            <p>11F,Arts,AECS-Jadugoda</p>
+                            <p class="role">Assist in Mechanical work and Presentation preparation.</p>
+                            
+                        </div>
+
+                        <div class="teammate-card">
+                            <img src="arnab-removebg-preview.png" alt="Teammate 2 Photo" class="teammate-photo">
+                             <h3>Arnab Mishra</h3>
+                            <p>11F,Arts,AECS-Jadugoda</p>
+                            <p class="role">Overall Idea design and Mechanical Work of the Robot.</p>
+                        </div>
+                        
+                        <div class="teammate-card">
+                            <img src="girl2-removebg-preview.png" alt="Teammate 3 Photo" class="teammate-photo">
+                            <h3 >Suman Nayak</h3>
+                            <p>11F,Arts,AECS-Jadugoda</p>
+                            <p class="role">Providing parts and Components.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="card data-hub-section">
+                    <h2>ARDUINO MODEL</h2>
+                    <img src="Arduino 3d model.png" alt="">
+                    <p><span>ARDUINO UNO R3:</span> ONLINE</p>
+                    <p><span>SENSOR ARRAY:</span>CALIBRATED</p>
+                    <p><span>MODULE SYNC:</span>98% COMPPLETE</P>
+                    <P><SPan>POWER DRAW:</SPan>5V / 2A</P>
+                    
+                </section>
+
+                <section class="card diagram-section">
+                    <h2>MULTITASKING FARMING ROBOT MODEL</h2>
+                    <img src="Robot.png" alt="">
+                    
+                </section>
+
+                <section class="card feedback-section">
+                    <h2>FEEDBACK TERMINAL</h2>
+                    <form id="feedbackForm" class="feedback-form">
+                        <textarea id="feedbackTextarea" placeholder="Drop your thoughts & glitches here..." rows="4"></textarea>
+                        <br>
+                        <button type="submit" class="button neon-button">SUBMIT DATA</button>
+                    </form>
+                    <p id="thankYouMessage" class="thank-you">THANK YOU FOR YOUR INPUT. DATA RECEIVED.</p>
+                </section>
+            </main>
+        </div>
+        
+    </div>
+
+    <script>
+        
+        const form = document.getElementById('feedbackForm');
+        const textarea = document.getElementById('feedbackTextarea');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
+        
+        function handleFormSubmit(event) {
+            event.preventDefault(); 
+
+            if (textarea.value.trim() === "") {
+                thankYouMessage.textContent = ">>> WARNING: Input required. Please enter feedback.";
+                thankYouMessage.style.opacity = 1;
+                thankYouMessage.style.color = 'var(--color-neon-magenta)';
+                setTimeout(() => {
+                    thankYouMessage.style.opacity = 0;
+                    thankYouMessage.style.color = 'var(--color-neon-green)';
+                    thankYouMessage.textContent = "THANK YOU FOR YOUR INPUT. DATA RECEIVED.";
+                }, 3000);
+                return;
+            }
+
+            thankYouMessage.style.opacity = 1;
+            
+            const originalValue = textarea.value;
+            textarea.value = '';
+            
+            console.log("--- New Feedback Received ---");
+            console.log("Data Payload:", originalValue);
+            console.log("--- End Payload ---");
+
+            setTimeout(() => {
+                thankYouMessage.style.opacity = 0;
+            }, 4000); 
+        }
+
+        form.addEventListener('submit', handleFormSubmit);
+    </script>
+   
+</body>
+</html>

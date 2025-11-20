@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details and Archive</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ====================================
+           1. Global Styles & Variables 
+        ==================================== */
+        :root {
+            --color-bg: #0d0221;
+            --color-neon-blue: #00FFFF;
+            --color-neon-green: #00FF00;
+            --color-neon-magenta: #FF00FF;
+            --font-header: 'Chakra Petch', sans-serif;
+            --font-body: 'Share Tech Mono', monospace;
+            --shadow-blue: 0 0 8px var(--color-neon-blue), 0 0 15px var(--color-neon-blue);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-radius: 8px;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: #E0E0E0;
+            font-family: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* ====================================
+           2. SCI-FI BACKGROUND GRID
+        ==================================== */
+        .matrix-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            opacity: 0.2;
+            pointer-events: none;
+            animation: grid-flicker 15s linear infinite;
+        }
+
+        @keyframes grid-flicker {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.15; }
+            90% { opacity: 0.25; }
+        }
+
+        /* ====================================
+           3. Layout & Structure 
+        ==================================== */
+        .page-wrapper {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(10, 5, 20, 0.85);
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            min-height: calc(100vh - 40px);
+        }
+        
+        @media (max-width: 600px) {
+            .content-container { padding: 10px; }
+            .page-wrapper { padding: 10px; }
+        }
+
+        /* Section Container Style */
+        .detail-section {
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--color-neon-magenta);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+
+        /* ====================================
+           4. Typography & Header 
+        ==================================== */
+        .main-header { text-align: center; margin-bottom: 30px; }
+        h1, h2 {
+            font-family: var(--font-header);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-neon-blue);
+        }
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-shadow: var(--shadow-blue);
+            padding: 10px 0;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-neon-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* ====================================
+           5. Details Content & Data Animation
+        ==================================== */
+        
+        .animated-data-display {
+            background-color: rgba(0, 50, 50, 0.6);
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 5px solid var(--color-neon-green);
+            animation: data-pulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes data-pulse {
+            from { border-color: var(--color-neon-green); box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+            to { border-color: var(--color-neon-blue); box-shadow: 0 0 10px rgba(0, 255, 255, 0.8); }
+        }
+
+        .animated-data-display ul, .animated-data-display ol {
+            padding-left: 20px; 
+            margin-top: 15px;
+            color: var(--color-neon-blue);
+        }
+        
+        .animated-data-display li {
+            margin-bottom: 8px;
+        }
+
+        /* ====================================
+           6. Navigation & Buttons
+        ==================================== */
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-neon-green);
+            font-family: var(--font-header);
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border: 2px solid var(--color-neon-green);
+            transition: all 0.3s;
+            box-shadow: 0 0 8px var(--color-neon-green);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-bg);
+            background-color: var(--color-neon-green);
+            border-color: var(--color-neon-green);
+            box-shadow: 0 0 15px var(--color-neon-green);
+        }
+
+
+        /* ====================================
+           7. Thank You Message 
+        ==================================== */
+        .thank-you-message {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid var(--color-neon-blue);
+            background-color: rgba(0, 0, 50, 0.5);
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .thank-you-message span {
+            display: block;
+            margin-top: 10px;
+            color: var(--color-neon-green);
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <!-- Sci-Fi Grid Overlay -->
+    <div class="matrix-overlay"></div>
+    
+    <div class="page-wrapper">
+        
+        <div class="content-container">
+            
+            <header class="main-header">
+                <h1>PROJECT DETAILS & ARCHIVE</h1>
+                <p class="subtitle">Full system specifications and collaborative uplink.</p>
+            </header>
+
+            <!-- Back Navigation -->
+            <a href="farming_robot_team.html" class="nav-link">← BACK TO TEAM</a>
+            
+            <!-- 1. Project Overview (Condensed) -->
+            <section class="detail-section">
+                <h2>PROJECT OVERVIEW: SMART FARMING</h2>
+                <p style="margin-bottom: 15px;">**Agriculture meets technology** to enhance productivity. The Smart Farming Robot is a modern machine designed to **automate** tasks like **watering, seeding, and monitoring crops** using **sensors and Arduino**. The goal is simple: save time, reduce manual labor, and increase overall farm efficiency.</p>
+            </section>
+
+            <!-- 2. Objectives (Condensed) -->
+            <section class="detail-section">
+                <h2>CORE OBJECTIVES</h2>
+                <div class="animated-data-display">
+                    <ul style="list-style-type: '🎯 ';">
+                        <li>**Automation:** Reduce manual effort for repetitive tasks.</li>
+                        <li>**Efficiency:** Faster, more productive farming processes.</li>
+                        <li>**Multi-Tasking:** Sowing, watering, and cutting with a single machine.</li>
+                        <li>**Control:** Voice operation via mobile phone.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. Key Components -->
+            <section class="detail-section">
+                <h2>KEY COMPONENTS: BUILDING BLOCKS</h2>
+                <div class="animated-data-display">
+                    <p style="color: var(--color-neon-magenta); margin-bottom: 10px;">-- HARDWARE LOG (ONLINE) --</p>
+                    <ul style="list-style-type: '⚙️ ';">
+                        <li>**Arduino Uno:** System control and command processing.</li>
+                        <li>**Motor Driver & DC/BLDC Motors:** Enables smooth, powerful movement and cutting.</li>
+                        <li>**Bluetooth Module (HC-05):** Wireless control interface.</li>
+                        <li>**Mini Water Pump:** Automated and precise plant irrigation.</li>
+                        <li>**Ultrasonic Sensor:** Obstacle detection for navigation.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4. Operating Logic -->
+            <section class="detail-section">
+                <h2>OPERATING LOGIC</h2>
+                <div class="animated-data-display">
+                    <ol style="list-style-type: decimal; padding-left: 20px; color: var(--color-neon-blue);">
+                        <li style="margin-bottom: 10px;">**Input:** Farmer issues voice command (mobile app).</li>
+                        <li style="margin-bottom: 10px;">**Communication:** Bluetooth sends command to Arduino.</li>
+                        <li style="margin-bottom: 10px;">**Processing:** Arduino processes data and controls motors/sensors.</li>
+                        <li>**Execution:** Robot autonomously performs assigned task (e.g., seeding or watering).</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- 5. Future Scope -->
+            <section class="detail-section">
+                <h2>FUTURE SCOPE: NEXT PHASE</h2>
+                <div class="animated-data-display">
+                    <ul style="list-style-type: '🚀 ';">
+                        <li>**GPS Integration:** Autonomous path planning for large fields.</li>
+                        <li>**Wi-Fi Camera System:** Real-time crop observation and monitoring.</li>
+                        <li>**Solar Panel Addition:** Eco-friendly charging for sustainability.</li>
+                        <li>**AI Crop Health:** Using AI to detect diseases and optimize growth.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Thank You Message -->
+            <div class="thank-you-message">
+                <p>SYSTEM UPLINK SUCCESSFUL. We thank you for reviewing the core data. Your support ensures the future of automated, sustainable agriculture.</p>
+                <span>— The Smart Farming Robot Development Team</span>
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
